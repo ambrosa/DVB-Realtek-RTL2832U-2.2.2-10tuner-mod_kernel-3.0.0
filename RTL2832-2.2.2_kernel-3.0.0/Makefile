@@ -4,12 +4,11 @@
 
 
 # Change BASEDIR accordingly to your paths (ambrosa)
-BASEDIR := /home/ambrosa/GIT
+#BASEDIR := /home/ambrosa/GIT
+#SOURCEDIR := $(BASEDIR)/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0/RTL2832-2.2.2_kernel-3.0.0
+
+SOURCEDIR := $(PWD)
 # ----------------------------------------
-
-
-
-SOURCEDIR := $(BASEDIR)/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0/RTL2832-2.2.2_kernel-3.0.0
 
 dvb-usb-rtl2832u-objs := demod_rtl2832.o dvbt_demod_base.o dvbt_nim_base.o \
 	foundation.o math_mpi.o nim_rtl2832_mxl5007t.o nim_rtl2832_fc2580.o \
