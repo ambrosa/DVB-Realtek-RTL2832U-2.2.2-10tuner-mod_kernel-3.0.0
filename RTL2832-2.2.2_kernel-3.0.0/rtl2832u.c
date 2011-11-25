@@ -7,26 +7,26 @@
 #include "rtl2832u_ioctl.h"
 
 
-int dvb_usb_rtl2832u_debug=3;
+int dvb_usb_rtl2832u_debug=0;
 module_param_named(debug,dvb_usb_rtl2832u_debug, int, 0644);
-MODULE_PARM_DESC(debug, "Set debugging level (1=info,xfer=2 (or-able),rc=3)." DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(debug, "Set debugging level (1=info,xfer=2 (or-able)), default=0" DVB_USB_DEBUG_STATUS);
 
 
 int demod_default_type=0;
 module_param_named(demod, demod_default_type, int, 0644);
-MODULE_PARM_DESC(demod, "Set default demod type(0=dvb-t, 1=dtmb, 2=dvb-c)"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(demod, "Set default demod type (0=dvb-t, 1=dtmb, 2=dvb-c), default=0"DVB_USB_DEBUG_STATUS);
 
-int dtmb_error_packet_discard;
+int dtmb_error_packet_discard=0;
 module_param_named(dtmb_err_discard, dtmb_error_packet_discard, int, 0644);
-MODULE_PARM_DESC(dtmb_err_discard, "Set error packet discard type(0=not discard, 1=discard)"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(dtmb_err_discard, "Set error packet discard type (0=not discard, 1=discard), default=0"DVB_USB_DEBUG_STATUS);
 
-int dvb_use_rtl2832u_rc_mode=2;
+int dvb_use_rtl2832u_rc_mode=3;
 module_param_named(rtl2832u_rc_mode, dvb_use_rtl2832u_rc_mode, int, 0644);
-MODULE_PARM_DESC(rtl2832u_rc_mode, "Set default rtl2832u_rc_mode(0=rc6, 1=rc5, 2=nec, 3=disable rc, default=2)."DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(rtl2832u_rc_mode, "Set default rtl2832u_rc_mode (0=rc6, 1=rc5, 2=nec, 3=disable rc), default=3"DVB_USB_DEBUG_STATUS);
 
 int dvb_use_rtl2832u_card_type=0;
 module_param_named(rtl2832u_card_type, dvb_use_rtl2832u_card_type, int, 0644);
-MODULE_PARM_DESC(rtl2832u_card_type, "Set default rtl2832u_card_type type(0=dongle, 1=mini card, default=0)."DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(rtl2832u_card_type, "Set default rtl2832u_card_type type (0=dongle, 1=mini card), default=0"DVB_USB_DEBUG_STATUS);
 
 
 
@@ -40,7 +40,7 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 #define RT_RC_POLLING_INTERVAL_TIME_MS			287
 #define MAX_RC_PROTOCOL_NUM				3			
 
-static struct dvb_usb_rc_key rtl2832u_rc_keys_map_table[] = {// realtek Key map   	
+static struct rc_map_table rtl2832u_rc_keys_map_table[] = {// realtek Key map   	
 		{ 0x0400, KEY_0 },           // 0 
 		{ 0x0401, KEY_1 },           // 1 
 		{ 0x0402, KEY_2 },           // 2 

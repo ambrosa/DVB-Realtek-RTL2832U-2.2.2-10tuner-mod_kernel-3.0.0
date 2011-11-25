@@ -41,7 +41,6 @@
 #define	USB_PID_DEXATEK_9202					0x9202
 
 
-#define	USB_VID_TERRATEC						0x0CCD
 #define	USB_PID_TERRATEC_00A9				0x00A9
 #define	USB_PID_TERRATEC_00B3				0x00B3
 
@@ -85,7 +84,6 @@
 #define USB_PID_YUAN_WARM84	                        0x3284
 
 
-#define	USB_VID_GTEK							0x1F4D
 #define	USB_PID_GTEK_WARM_0837				0x0837	
 #define	USB_PID_GTEK_WARM_A803				0xA803
 #define	USB_PID_GTEK_WARM_B803				0xB803
