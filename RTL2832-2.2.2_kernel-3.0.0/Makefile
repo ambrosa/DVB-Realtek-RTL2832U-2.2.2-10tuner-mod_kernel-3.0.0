@@ -41,6 +41,6 @@ install:
 	cp dvb-usb-rtl2832u.ko $(KINS)/`uname -r`/kernel/drivers/media/dvb/dvb-usb/ 
 	depmod -a
 
-clean::
+clean:
 	-rm -f  *.o  *.ko *.mod.c .*.o.cmd  .*.o.d  .*.ko.cmd Module.symvers Module.markers modules.order
 	-rm -rf .tmp_versions
