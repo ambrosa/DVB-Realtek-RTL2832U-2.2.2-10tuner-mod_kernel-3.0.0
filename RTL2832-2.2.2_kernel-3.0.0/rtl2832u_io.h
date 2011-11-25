@@ -7,9 +7,16 @@
 #include "dvb-usb.h"
 
 extern int dvb_usb_rtl2832u_debug;
+/*
 #define deb_info(args...) dprintk(dvb_usb_rtl2832u_debug,0x01,args)
 #define deb_xfer(args...) dprintk(dvb_usb_rtl2832u_debug,0x02,args)
 #define deb_rc(args...)   dprintk(dvb_usb_rtl2832u_debug,0x03,args)
+*/
+
+#define deb_info(args...) printk(KERN_INFO args)
+#define deb_xfer(args...) printk(KERN_INFO args)
+#define deb_rc(args...)   printk(KERN_INFO args)
+
 #define LEN_1_BYTE					1
 #define LEN_2_BYTE					2
 #define LEN_4_BYTE					4

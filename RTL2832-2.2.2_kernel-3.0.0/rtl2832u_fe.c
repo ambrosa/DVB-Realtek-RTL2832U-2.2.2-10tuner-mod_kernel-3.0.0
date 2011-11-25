@@ -1689,8 +1689,8 @@ rtl2832_set_parameters(
 		//	mutex_unlock(&p_state->i2c_repeater_mutex);		
 		//	return 0;
 		//}
-
-              deb_info(("%s:  RTL2836 Hold Stage=9\n"),__FUNCTION__);	
+		
+		deb_info("%s:  RTL2836 Hold Stage=9\n",__FUNCTION__);
 		if(read_rtl2836_demod_register(p_state->d, RTL2836_DEMOD_ADDR,  PAGE_3,  0xf8,  &data, LEN_1_BYTE))  goto error;
 		data &=(~BIT_0_MASK);  //reset Reg_present
 		data &=(~BIT_1_MASK);  //reset Reg_lock
