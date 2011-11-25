@@ -1,0 +1,11 @@
+2011-11-25
+
+Original Realtek RTL2832U chipset (DVB) Linux 2.6.x driver
+Rel. 2.2.2
+
+Thanks to Realtek
+
+This driver is a full version using DVB-T/C DTMB and 10 tuners
+modded for Linux kernel 3.0.0
+
+

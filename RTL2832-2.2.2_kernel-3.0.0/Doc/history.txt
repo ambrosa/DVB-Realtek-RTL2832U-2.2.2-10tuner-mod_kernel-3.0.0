@@ -1,0 +1,52 @@
+
+History of Realtek RTL2832U DVB-T Linux Driver:
+Ver 2.2.2  a. support rc function
+
+Ver 2.2.1  a.PID/VID
+	   b. linux kernel:2.6.32  and 2.6.33
+
+Ver 2.2.0  a.add tuner fc0013
+	b.add sleep mode
+	c. linux kernel:2.6.32  and 2.6.33
+
+Ver 2.1.9  a.add device suspend power
+	b. linux kernel:2.6.32  and 2.6.33
+	 
+ 
+Ver 2.1.7  a.Modify ioctrl code  power mapping(tuner fc0012)
+	b.add PID/VID
+	C.modify power mapping(tuner fc0012)	
+     	
+Ver 2.1.4  a.add support tuner: NXP tda18272
+	   b.add io control code 
+	   c.add set demod power(mini card)	
+		
+Ver 2.0.1  add control Tuner FC0012 V-Band and U-Band work(use gpio6)
+
+Ver 2.0.0  a.update tuner setting(support tuner)
+	   b.update demod setting
+	   c.add rc function	
+
+Ver 1.4.2   update tua tuner setting
+            update function
+
+Ver 1.4.1   update FC0012 tuner setting
+            add VID&PID
+
+Ver 1.4  add support tuner: E4000 
+
+Ver 1.3  a. add support DTMB (RTL2836)
+         b. remove function set_demod_power()
+         c. change RTD2831_URB_SIZE from 39480 to 4096; change RTD2831_URB_NUMBER from 4 to 10
+         d. add parameter "dtmb_err_discard"
+
+Ver 1.2  a. add support tuner: FC0012
+         b. check tunner from GPIO4 first
+
+Ver 1.1  a. add customers' VID&PID
+         b. solve the bug that our module cann't be removed when the device is plugged out.
+
+Ver 1.0  support  tuners--MT2266 FC2580 TUA9001 and MXL5007T 		
+
+
+
