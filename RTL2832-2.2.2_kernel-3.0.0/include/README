@@ -1,4 +1,4 @@
 2011-11-25
 
-DVB include files neded for stand alone compile
+DVB include files needed for standalone compile
 Get from linux-3.0.0 kernel source drivers/media/dvb/
