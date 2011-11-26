@@ -1,20 +1,35 @@
 2011-11-26
 
-Original Realtek RTL2832U chipset (DVB) Linux 2.6.x driver
-Rel. 2.2.2
+Original Realtek RTL2832U chipset (DVB) Linux 2.6.x driver rel. 2.2.2
 
 Thanks to Realtek
 Thanks to Xgazza
 Thanks to Skaman
 Thanks to Gennar1
 
-This driver is a full version using DVB-T/C DTMB and 10 tuners
+This driver is the full version using DVB-T/C DTMB and 10 tuners
 modded for Linux kernel 3.0.0
 
 !! WORK IN PROGRESS , ALPHA STATE !!
 
 
+Tested with:
+ Xubuntu 11.10 64bit + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
+
+
+Some DVB-T stick equipped with rtl2832:
+ DIKOM USB-DVBT HD (ID 1b80:d394)
+ NILOX DVB-T Stick N15 (ID 1b80:d393)
+ TRUST 16738 (ID 0bda:2832)
+ TERRATEC Cinergy T Stick BLACK (ID 0ccd:00a9)
+ TX Hollywood DVTB (ID 1d19:1101)
+ DIGIVOX mini II v3.0 (ID 1d19:1101)
+
+
 **** FRESH INSTALL ****
+
+- install compile kit
+sudo apt-get install build-essential
 
 - install linux headers
 sudo apt-get install linux-headers-$(uname -r)
