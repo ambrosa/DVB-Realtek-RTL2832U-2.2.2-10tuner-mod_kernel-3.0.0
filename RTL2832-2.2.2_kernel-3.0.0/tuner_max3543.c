@@ -1367,7 +1367,7 @@ int MAX3543_ReadROM(TUNER_MODULE *pTuner)
 		IRHR and CFSET constants.  
 		This is to be called after the Max3543 powers up.              
 	*/
-	UINT_16 rom_data[11];
+	UINT_16 rom_data[12];
 	UINT_16 i;
 
 	MAX3543_EXTRA_MODULE *pExtra;

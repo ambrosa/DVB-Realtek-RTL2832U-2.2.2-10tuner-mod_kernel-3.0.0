@@ -40,7 +40,9 @@ DVB_DEFINE_MOD_OPT_ADAPTER_NR(adapter_nr);
 #define RT_RC_POLLING_INTERVAL_TIME_MS			287
 #define MAX_RC_PROTOCOL_NUM				3			
 
-static struct rc_map_table rtl2832u_rc_keys_map_table[] = {// realtek Key map   	
+/* original realtek remote control key map */
+/*
+static struct rc_map_table rtl2832u_rc_keys_map_table[] = {  	
 		{ 0x0400, KEY_0 },           // 0 
 		{ 0x0401, KEY_1 },           // 1 
 		{ 0x0402, KEY_2 },           // 2 
@@ -75,6 +77,62 @@ static struct rc_map_table rtl2832u_rc_keys_map_table[] = {// realtek Key map
 	 	{ 0x0423, KEY_BACK },        // <- BACK
 		{ 0x0414, KEY_FORWARD }    // >> 
 	};
+*/
+
+/* Xgazza remote control key table */
+static struct rc_map_table rtl2832u_rc_keys_map_table[] = {
+	{ 0x40bf, KEY_POWER2 },        // TV POWER
+	{ 0x08f7, KEY_POWER },         // PC POWER
+	{ 0x58a7, KEY_REWIND },        // REWIND
+	{ 0xd827, KEY_PLAY },          // PLAY
+	{ 0x22dd, KEY_FASTFORWARD },   // FAST FORWARD
+	{ 0x02fd, KEY_STOP },          // STOP
+	{ 0x5aa5, KEY_PREVIOUS },      // SKIP BACK
+	{ 0x42bd, KEY_PLAYPAUSE },     // PAUSE
+	{ 0xa25d, KEY_NEXT },          // SKIP FOWARD
+	{ 0x12ed, KEY_RECORD },        // RECORD
+	{ 0x28d7, KEY_BACK },          // BACK
+	{ 0xa857, KEY_INFO },          // MORE
+//	{ 0x28d7, BTN_LEFT },          // MOUSE LEFT BUTTON
+//	{ 0xa857, BTN_RIGHT },         // MOUSE RIGHT BUTTON
+	{ 0x6897, KEY_UP},             // UP
+	{ 0x48b7, KEY_DOWN},           // DOWN
+	{ 0xe817, KEY_LEFT },          // LEFT
+	{ 0x30cf, KEY_RIGHT },         // RIGHT
+	{ 0x18e7, KEY_OK },            // OK 
+	{ 0xc23d, KEY_ZOOM },          // ASPECT
+//	{ 0xea15, KEY_??? },           // MOUSE
+	{ 0x708f, KEY_RED },           // RED 
+	{ 0xc837, KEY_GREEN },         // GREEN 
+	{ 0x8877, KEY_YELLOW },        // YELLOW
+	{ 0x9867, KEY_BLUE },          // BLUE
+	{ 0x807f, KEY_VOLUMEUP },      // VOL UP 
+	{ 0x7887, KEY_VOLUMEDOWN },    // VOL DOWN 
+	{ 0xb04f, KEY_HOME },          // HOME
+	{ 0x00ff, KEY_MUTE },          // MUTE 
+	{ 0xd22d, KEY_CHANNELUP },     // CH UP 
+	{ 0xf20d, KEY_CHANNELDOWN },   // CH DOWN 
+	{ 0x50af, KEY_0 },             // 0 
+	{ 0xf807, KEY_1 },             // 1 
+	{ 0xc03f, KEY_2 },             // 2 
+	{ 0x20df, KEY_3 },             // 3 
+	{ 0xa05f, KEY_4 },             // 4 
+	{ 0x38c7, KEY_5 },             // 5 
+	{ 0x609f, KEY_6 },             // 6 
+	{ 0xe01f, KEY_7 },             // 7 
+	{ 0x10ef, KEY_8 },             // 8 
+	{ 0xb847, KEY_9 },             // 9
+	{ 0x906f, KEY_NUMERIC_STAR },  // *
+	{ 0xd02f, KEY_NUMERIC_POUND }, // #
+	{ 0x52ad, KEY_EPG },           // GUIDE
+	{ 0x926d, KEY_VIDEO },         // RTV
+	{ 0x32cd, KEY_HELP },          // HELP
+	{ 0xca35, KEY_CYCLEWINDOWS },  // PIP(?)
+	{ 0xb24d, KEY_RADIO },         // RADIO
+	{ 0x0af5, KEY_DVD },           // DVD
+	{ 0x8a75, KEY_AUDIO },         // AUDIO
+	{ 0x4ab5, KEY_TITLE }          // TITLE
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 enum   rc_status_define{

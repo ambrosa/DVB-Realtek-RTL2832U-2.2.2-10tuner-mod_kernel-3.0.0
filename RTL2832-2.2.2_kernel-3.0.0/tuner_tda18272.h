@@ -707,8 +707,8 @@ extern "C"
 #endif /* _TMBSL_TDA182I2_INSTANCE_CUSTOM_H */
 
 
-//#endif               \
-//*/
+//#endif               
+
 
 
 
@@ -1367,7 +1367,7 @@ UInt32   : 8;
 
 #define inline  __inline__
 
-#elif      (TMFL_OS_IS_HPUNIX || TMFL_OS_IS_NULLOS)
+// #elif      (TMFL_OS_IS_HPUNIX || TMFL_OS_IS_NULLOS)
     //
     // TMFL_OS_IS_HPUNIX is the HP Unix workstation target OS environment for the
     // DVP SDE2 using the GNU gcc toolset.  It is the same as TMFL_OS_IS_NULLOS
@@ -1376,7 +1376,7 @@ UInt32   : 8;
     //
     /* LM; 02/07/2202; to be able to use Insure, I modify the definition of inline */
     /* #define inline  __inline__ */
-#define inline  
+// #define inline  
 
 #elif TMFL_OS_IS_ECOS && TMFL_CPU_IS_MIPS
 
@@ -3363,7 +3363,7 @@ extern "C"
     tmErrorCode_t
         tmbslTDA182I2GetPowerLevel(
         tmUnitSelect_t  tUnit,      /* I: Unit number */
-        UInt32*         pPowerLevel /* O: Power Level in dBµV */
+        UInt32*         pPowerLevel /* O: Power Level in dBuV */
         );
     tmErrorCode_t
         tmbslTDA182I2SetIRQWait(
@@ -3554,9 +3554,12 @@ extern "C"
     } tmTDA182I2Object_t, *ptmTDA182I2Object_t, **pptmTDA182I2Object_t;
 
 
+/* suppress warning about static */
+#pragma GCC diagnostic ignored "-Wunused-function"
 static tmErrorCode_t TDA182I2Init(tmUnitSelect_t tUnit);
 static tmErrorCode_t TDA182I2Wait(ptmTDA182I2Object_t pObj, UInt32 Time);
 static tmErrorCode_t TDA182I2WaitXtalCal_End( ptmTDA182I2Object_t pObj, UInt32 timeOut, UInt32 waitStep);
+
 
 extern tmErrorCode_t TDA182I2MutexAcquire(ptmTDA182I2Object_t   pObj, UInt32 timeOut);
 extern tmErrorCode_t TDA182I2MutexRelease(ptmTDA182I2Object_t   pObj);

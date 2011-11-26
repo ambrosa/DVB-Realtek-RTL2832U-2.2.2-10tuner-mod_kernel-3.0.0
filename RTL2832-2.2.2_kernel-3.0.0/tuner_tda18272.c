@@ -8958,7 +8958,7 @@ tmddTDA182I2Object_t gddTDA182I2Instance[] =
         tmddTDA182I2_PowerStandbyWithXtalOn,    /* curPowerState */
         True,                                   /* bIRQWait */
         {
-            0  // I2CMap;
+            { 0 } // I2CMap;
         }
     },
     {
@@ -8986,7 +8986,7 @@ tmddTDA182I2Object_t gddTDA182I2Instance[] =
         tmddTDA182I2_PowerStandbyWithXtalOn,    /* curPowerState */
         True,                                   /* bIRQWait */
         {
-            0  // I2CMap;
+           { 0 } // I2CMap;
         }
     }
 };

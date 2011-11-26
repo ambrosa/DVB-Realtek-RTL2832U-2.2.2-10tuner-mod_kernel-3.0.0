@@ -495,7 +495,7 @@ usb_init_bulk_setting(
 		 	goto error;
 		}
 
-		deb_info("HIGH SPEED\n");
+		deb_force("RTL2832U %s : USB2.0 HIGH SPEED (480Mb/s)\n", __FUNCTION__);
 	}
 	else 
     	{
@@ -511,7 +511,7 @@ usb_init_bulk_setting(
 		 	goto error;
 		}
 		
-		deb_info("FULL SPEED\n");
+		deb_force("RTL2832U %s : USB1.1 FULL SPEED (12Mb/s)\n", __FUNCTION__);
 	}	
 
 	deb_info(" -%s \n", __FUNCTION__);
@@ -907,7 +907,7 @@ check_tuner_type(
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_UNKNOWN;
 			
-		deb_force("RTL2832U %s : Unknown tuner on board...\n", __FUNCTION__);	
+		deb_force("RTL2832U %s : ERROR Unknown tuner on board...\n", __FUNCTION__);	
 		goto error;
 	}
 

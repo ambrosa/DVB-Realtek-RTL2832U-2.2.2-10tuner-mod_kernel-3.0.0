@@ -369,7 +369,7 @@ rtl2832_tda18272_GetRfPowerLevelDbm(
 	DVBT_DEMOD_MODULE *pDemod;
 
 	unsigned long FsmStage;
-	int IfAgc;
+	long IfAgc;
 
 
 	// Get demod module.

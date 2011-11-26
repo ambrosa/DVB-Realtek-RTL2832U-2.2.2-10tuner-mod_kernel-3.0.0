@@ -360,7 +360,7 @@ typedef enum {DVB_T, DVB_C, ATV, ATV_SECAM_L} standard;
 	*/
 //	#define XTALREF scalextal(20.25)
 	/* Use this form if NOT using floating point math. */
-	/* #define XTALREF 81          
+	/* #define XTALREF 81  */        
 	/* (XTALSCALE * Reference frequency 20.24 * 4 = 81) */
 //#endif
 
@@ -403,7 +403,7 @@ int MAX3543_SeedVCO(TUNER_MODULE *pTuner, UINT_16 Fvco);
 
 		/*   IC_address is 0xC0 or 0xC4 depending on JP8 of the Max3543 evkit board. */
 		/*   0xC0 if the ADDR pin of the Max3543 is low, x0C4 if the pin is high. */
-		/*   The register address is the Index into the register /*
+		/*   The register address is the Index into the register */
 		/*   you wish to fill.*/
 
 //    unsigned short Max3543_Read(unsigned short reg);

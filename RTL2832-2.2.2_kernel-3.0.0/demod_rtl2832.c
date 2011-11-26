@@ -754,7 +754,7 @@ rtl2832_GetSignalStrength(
 	)
 {
 	unsigned long FsmStage;
-	int IfAgc;
+	long IfAgc;
 
 
 
