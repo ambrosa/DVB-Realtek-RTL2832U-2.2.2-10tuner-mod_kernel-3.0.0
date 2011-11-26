@@ -390,7 +390,7 @@ typedef int             SData_t;        /*  type must be at least 32 bits   */
 typedef void *          Handle_t;       /*  memory pointer type             */
 typedef double          FData_t;        /*  floating point data type        */
 #endif
-#define MAX_UDATA         (4294967295)  /*  max value storable in UData_t   */
+#define MAX_UDATA         (4294967295U)  /*  max value storable in UData_t   */
 
 /*
 ** Define an MTxxxx_CNT macro for each type of tuner that will be built

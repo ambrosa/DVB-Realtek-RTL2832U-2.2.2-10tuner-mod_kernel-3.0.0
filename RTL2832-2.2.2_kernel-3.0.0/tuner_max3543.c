@@ -654,7 +654,7 @@ int MAX3543_Init(TUNER_MODULE *pTuner)
 	pExtra->denominator = pExtra->XTALREF * 4 * pExtra->LOSCALE;   
 
    /* The fracscale is used to calculate the fractional remainder of the N+FractionalN ratio.  */
-	pExtra->fracscale = 2147483648/pExtra->denominator;
+	pExtra->fracscale = 2147483648U/pExtra->denominator;
 
 
 //   Note: Set standard mode, channel bandwith, and RF frequency in other functions.
