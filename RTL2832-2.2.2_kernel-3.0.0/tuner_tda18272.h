@@ -1300,7 +1300,8 @@ UInt32   : 8;
     //
 
 #if        TMFL_OS_IS_CE || TMFL_OS_IS_NT
-#define inline  __inline
+// removed to compile without warning with OpenPli
+//#define inline  __inline
 
     //
     // Places shared data in named DLL data segment for WinNT/WinCE builds.
