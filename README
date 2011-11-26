@@ -54,12 +54,24 @@ sudo make install
 - insert module (or reboot)
 modprobe dvb_usb_rtl2832u
 
+If all is fine you can see in kernel log something like this:
+  [18087.037024] dvb-usb: found a 'USB DVB-T DEVICE' in warm state.
+  [18087.037031] dvb-usb: will pass the complete MPEG2 transport stream to the software demuxer.
+  [18087.038776] DVB: registering new adapter (USB DVB-T DEVICE)
+  [18087.055952] RTL2832U usb_init_bulk_setting : USB2.0 HIGH SPEED (480Mb/s)
+  [18087.287475] RTL2832U check_tuner_type : FC0012 tuner on board...
+  [18087.853235] DVB: registering adapter 0 frontend 0 (Realtek DVB-T RTL2832)...
+  [18087.853384] input: IR-receiver inside an USB DVB receiver as /devices/pci0000:00/0000:00:1d.7/usb1/1-7/input/input15
+  [18087.853419] dvb-usb: schedule remote query interval to 287 msecs.
+  [18087.853423] dvb-usb: USB DVB-T DEVICE successfully initialized and connected.
+  [18087.853447] usbcore: registered new interface driver dvb_usb_rtl2832u
+
 
 Note: Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
 
-- if you want enable basic debug (default disabled) use
+- if you want enable basic debug (default disabled) use:
 modprobe dvb_usb_rtl2832u debug=1
-- if you want enable remote_command (default disabled) use
+- if you want enable remote_command (default disabled) use:
 modprobe dvb_usb_rtl2832u rc_mode=2  (or =0 or =1)
 
 
