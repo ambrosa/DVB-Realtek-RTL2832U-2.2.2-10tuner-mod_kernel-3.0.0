@@ -836,21 +836,21 @@ check_tuner_type(
 	{
 	 	p_state->tuner_type = RTL2832_TUNER_TYPE_MT2266;
 
-		deb_info(" -%s : MT2266 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : MT2266 tuner on board...\n", __FUNCTION__);
 	}
 	else if ((!read_tuner_id_register(p_state, FC2580_TUNER_ADDR, FC2580_OFFSET,  tuner_id_data, LEN_1_BYTE)) &&
 			((tuner_id_data[0]&(~BIT7)) == FC2580_CHECK_VAL ))
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_FC2580;
 
-		deb_info(" -%s : FC2580 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : FC2580 tuner on board...\n", __FUNCTION__);
 	}
 	else if(( !read_tuner_id_register(p_state, MT2063_TUNER_ADDR, MT2063_CHECK_OFFSET,  tuner_id_data, LEN_1_BYTE)) &&
 			( tuner_id_data[0]==MT2063_CHECK_VALUE || tuner_id_data[0]==MT2063_CHECK_VALUE_2))
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_MT2063;
 
-		deb_info(" -%s : MT2063 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : MT2063 tuner on board...\n", __FUNCTION__);
 
 	}
 	else if(( !read_tuner_id_register(p_state, MAX3543_TUNER_ADDR, MAX3543_CHECK_OFFSET,  tuner_id_data, LEN_1_BYTE)) &&
@@ -858,7 +858,7 @@ check_tuner_type(
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_MAX3543;
 
-		deb_info(" -%s : MAX3543 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : MAX3543 tuner on board...\n", __FUNCTION__);
 
 	}
 	else if ((!read_tuner_id_register(p_state, TUA9001_TUNER_ADDR, TUA9001_OFFSET,  tuner_id_data, LEN_2_BYTE)) &&
@@ -866,34 +866,34 @@ check_tuner_type(
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_TUA9001;
 			
-		deb_info(" -%s : TUA9001 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : TUA9001 tuner on board...\n", __FUNCTION__);
 	}
 	else	 if ((!check_mxl5007t_chip_version(p_state, &chip_version)) &&
 			(chip_version == MXL5007T_CHECK_VALUE) )
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_MXL5007T;
 
-		deb_info(" -%s : MXL5007T tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : MXL5007T tuner on board...\n", __FUNCTION__);
 	}
 	else if ((!read_tuner_id_register(p_state, FC0012_BASE_ADDRESS , FC0012_CHECK_ADDRESS,  tuner_id_data, LEN_1_BYTE)) &&
 			(tuner_id_data[0] == FC0012_CHECK_VALUE))
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_FC0012;
 				
-		deb_info(" -%s : FC0012 tuner on board...\n", __FUNCTION__);	
+		deb_force("RTL2832U %s : FC0012 tuner on board...\n", __FUNCTION__);	
 	}
 	else	if((!read_tuner_id_register(p_state, E4000_BASE_ADDRESS, E4000_CHECK_ADDRESS, tuner_id_data, LEN_1_BYTE)) && 
 			(tuner_id_data[0] == E4000_CHECK_VALUE))	
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_E4000;
-		deb_info(" -%s : E4000 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : E4000 tuner on board...\n", __FUNCTION__);
 	}
 	else if(( !read_tuner_id_register(p_state, TDA18272_TUNER_ADDR, TDA18272_CHECK_OFFSET,  tuner_id_data, LEN_2_BYTE)) &&
 			( (tuner_id_data[0]==TDA18272_CHECK_VALUE1) && (tuner_id_data[1]==TDA18272_CHECK_VALUE2)))
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_TDA18272;
 
-		deb_info(" -%s : Tda18272 tuner on board...\n", __FUNCTION__);
+		deb_force("RTL2832U %s : Tda18272 tuner on board...\n", __FUNCTION__);
 
 	}	
 	else if ((!read_tuner_id_register(p_state, FC0013_BASE_ADDRESS , FC0013_CHECK_ADDRESS,  tuner_id_data, LEN_1_BYTE)) &&
@@ -901,13 +901,13 @@ check_tuner_type(
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_FC0013;
 				
-		deb_info(" -%s : FC0013 tuner on board...\n", __FUNCTION__);	
+		deb_force("RTL2832U %s : FC0013 tuner on board...\n", __FUNCTION__);	
 	}	
 	else
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_UNKNOWN;
 			
-		deb_info(" -%s : Unknown tuner on board...\n", __FUNCTION__);	
+		deb_force("RTL2832U %s : Unknown tuner on board...\n", __FUNCTION__);	
 		goto error;
 	}
 
