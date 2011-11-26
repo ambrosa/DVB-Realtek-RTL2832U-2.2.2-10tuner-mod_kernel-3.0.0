@@ -8,7 +8,7 @@ Thanks to Skaman
 Thanks to Gennar1
 
 This driver is the full version using DVB-T/C DTMB and 10 tuners
-modded for Linux kernel 3.0.0
+patched for Linux kernel 3.0.0 (Ubuntu Oneiric)
 
 !! WORK IN PROGRESS , ALPHA STATE !!
 
@@ -18,15 +18,15 @@ Tested with:
 
 
 Some DVB-T stick equipped with rtl2832:
- DIKOM USB-DVBT HD (ID 1b80:d394)
- NILOX DVB-T Stick N15 (ID 1b80:d393)
- TRUST 16738 (ID 0bda:2832)
- TERRATEC Cinergy T Stick BLACK (ID 0ccd:00a9)
- TX Hollywood DVTB (ID 1d19:1101)
- DIGIVOX mini II v3.0 (ID 1d19:1101)
+  DIKOM USB-DVBT HD (ID 1b80:d394)
+  NILOX DVB-T Stick N15 (ID 1b80:d393)
+  TRUST 16738 (ID 0bda:2832)
+  TERRATEC Cinergy T Stick BLACK (ID 0ccd:00a9)
+  TX Hollywood DVTB (ID 1d19:1101)
+  DIGIVOX mini II v3.0 (ID 1d19:1101)
 
 
-**** FRESH INSTALL ****
+**** UBUNTU FRESH INSTALL ****
 
 - install compile kit
 sudo apt-get install build-essential
