@@ -8,4 +8,55 @@ Thanks to Realtek
 This driver is a full version using DVB-T/C DTMB and 10 tuners
 modded for Linux kernel 3.0.0
 
+!! WORK IN PROGRESS , ALPHA STATE !!
+
+
+** FRESH INSTALL **
+
+- install linux headers
+sudo apt-get install linux-headers-$(uname -r)
+
+- install git
+sudo apt-get install git
+
+- clone this repo using git
+git clone git@github.com:ambrosa/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0.git 
+
+- goto into source dir
+cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
+cd RTL2832-2.2.2_kernel-3.0.0
+
+- compile code
+make clean
+make
+
+- install module
+sudo make install
+
+- insert module (or reboot)
+modprobe dvb_usb_rtl2832u
+
+- Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
+
+- if you want enable basic debug (default disabled) use
+modprobe dvb_usb_rtl2832u debug=1
+- if you want enable remote_command (default disabled) use
+modprobe dvb_usb_rtl2832u rc_mode=2  (or =0 or =1)
+
+
+** UPDATING ALREADY EXISTING LOCAL GIT REPO WITH NEW CHANGES **
+
+- goto into main repo dir
+cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
+
+- update local files with new changes
+git pull
+
+- compile 
+cd RTL2832-2.2.2_kernel-3.0.0
+make clean
+make
+
+- install module
+sudo make install
 
