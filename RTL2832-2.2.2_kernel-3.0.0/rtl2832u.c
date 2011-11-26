@@ -716,6 +716,11 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties;
 static int rtl2832u_usb_probe(struct usb_interface *intf,
 		const struct usb_device_id *id)
 {
+	/* Thats avoids bugs with 2 instances of driver that operate same hardware */
+	/* https://gitorious.org/rtl2832/rtl2832/commit/5495b3fda9e2c3bf4feef5d5751f6f2343380ea9 */
+	if (!intf->altsetting->desc.bNumEndpoints)
+		return -ENODEV;
+
 	if ( ( 0== dvb_usb_device_init(intf,&rtl2832u_1st_properties,THIS_MODULE,NULL,adapter_nr) )||
 		( 0== dvb_usb_device_init(intf,&rtl2832u_2nd_properties,THIS_MODULE,NULL,adapter_nr) ) ||
 		( 0== dvb_usb_device_init(intf,&rtl2832u_3th_properties,THIS_MODULE,NULL,adapter_nr) ) ||
