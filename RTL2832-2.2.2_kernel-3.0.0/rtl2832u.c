@@ -9,24 +9,24 @@
 
 int dvb_usb_rtl2832u_debug=0;
 module_param_named(debug,dvb_usb_rtl2832u_debug, int, 0644);
-MODULE_PARM_DESC(debug, "Set debugging level (1=info,xfer=2 (or-able)), default=0" DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(debug, "Set debugging level (0=disable, 1=info, 2=xfer, 4=rc (or-able)), default=0");
 
 
 int demod_default_type=0;
 module_param_named(demod, demod_default_type, int, 0644);
-MODULE_PARM_DESC(demod, "Set default demod type (0=dvb-t, 1=dtmb, 2=dvb-c), default=0"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(demod, "Set default demod type (0=dvb-t, 1=dtmb, 2=dvb-c), default=0");
 
 int dtmb_error_packet_discard=0;
 module_param_named(dtmb_err_discard, dtmb_error_packet_discard, int, 0644);
-MODULE_PARM_DESC(dtmb_err_discard, "Set error packet discard type (0=not discard, 1=discard), default=0"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(dtmb_err_discard, "Set error packet discard type (0=not discard, 1=discard), default=0");
 
 int dvb_use_rtl2832u_rc_mode=3;
 module_param_named(rtl2832u_rc_mode, dvb_use_rtl2832u_rc_mode, int, 0644);
-MODULE_PARM_DESC(rtl2832u_rc_mode, "Set default rtl2832u_rc_mode (0=rc6, 1=rc5, 2=nec, 3=disable rc), default=3"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(rtl2832u_rc_mode, "Set default rtl2832u_rc_mode (0=rc6, 1=rc5, 2=nec, 3=disable rc), default=3");
 
 int dvb_use_rtl2832u_card_type=0;
 module_param_named(rtl2832u_card_type, dvb_use_rtl2832u_card_type, int, 0644);
-MODULE_PARM_DESC(rtl2832u_card_type, "Set default rtl2832u_card_type type (0=dongle, 1=mini card), default=0"DVB_USB_DEBUG_STATUS);
+MODULE_PARM_DESC(rtl2832u_card_type, "Set default rtl2832u_card_type type (0=dongle, 1=mini card), default=0");
 
 
 
@@ -469,7 +469,7 @@ static int rtl2832u_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 	};
 
 
-	u8  data=0,i=0,byte_count=0;
+	u8  data=0,i=0,byte_count=0,tableSize;
 	int ret=0;
 	u8  rt_u8_code[rt_code_len];
 	u8  ucode[4];
@@ -546,14 +546,14 @@ static int rtl2832u_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 			else if (dvb_use_rtl2832u_rc_mode== 2)		ret =frt2(rt_u8_code,byte_count,ucode);	
 			else  
 			{
-					//deb_rc("%s : rc - unknow rc protocol set ! \n", __FUNCTION__);
+					deb_rc("%s : rc - unknow rc protocol set ! \n", __FUNCTION__);
 					ret=-1;
 					goto error;	
 			}
 			
 			if((ret != RC_FUNCTION_SUCCESS) || (ucode[0] ==0 && ucode[1] ==0 && ucode[2] ==0 && ucode[3] ==0))   
  			{
-					//deb_rc("%s : rc-rc is error scan code ! %x %x %x %x \n", __FUNCTION__,ucode[0],ucode[1],ucode[2],ucode[3]);
+					deb_rc("%s : rc-rc is error scan code ! %x %x %x %x \n", __FUNCTION__,ucode[0],ucode[1],ucode[2],ucode[3]);
 					ret=-1;
 					goto error;	
 			}
@@ -561,7 +561,8 @@ static int rtl2832u_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 			deb_info("-%s scan code %x %x %x %x,(0x%x) -- len=%d\n", __FUNCTION__,ucode[0],ucode[1],ucode[2],ucode[3],scancode,byte_count);
 
 			////////// map/////////////////////////////////////////////////////////////////////////////////////////////////////
-			for (i = 0; i < ARRAY_SIZE(rtl2832u_rc_keys_map_table); i++) {
+			tableSize = ARRAY_SIZE(rtl2832u_rc_keys_map_table);
+			for (i = 0; i < tableSize; i++) {
 				if(rtl2832u_rc_keys_map_table[i].scancode == scancode ){
 					*event = rtl2832u_rc_keys_map_table[i].keycode;
 					*state = REMOTE_KEY_PRESSED;
@@ -570,6 +571,8 @@ static int rtl2832u_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 				}		
 				
 			}
+			if (i == tableSize)
+				deb_rc("%s : rc - scancode 0x%x NOT found!\n", __FUNCTION__, scancode);
 		
 
 			memset(rt_u8_code,0,rt_code_len);
