@@ -1,9 +1,12 @@
-2011-11-25
+2011-11-26
 
 Original Realtek RTL2832U chipset (DVB) Linux 2.6.x driver
 Rel. 2.2.2
 
 Thanks to Realtek
+Thanks to Xgazza
+Thanks to Skaman
+Thanks to Gennar1
 
 This driver is a full version using DVB-T/C DTMB and 10 tuners
 modded for Linux kernel 3.0.0
@@ -11,7 +14,7 @@ modded for Linux kernel 3.0.0
 !! WORK IN PROGRESS , ALPHA STATE !!
 
 
-** FRESH INSTALL **
+**** FRESH INSTALL ****
 
 - install linux headers
 sudo apt-get install linux-headers-$(uname -r)
@@ -36,7 +39,8 @@ sudo make install
 - insert module (or reboot)
 modprobe dvb_usb_rtl2832u
 
-- Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
+
+Note: Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
 
 - if you want enable basic debug (default disabled) use
 modprobe dvb_usb_rtl2832u debug=1
@@ -44,9 +48,9 @@ modprobe dvb_usb_rtl2832u debug=1
 modprobe dvb_usb_rtl2832u rc_mode=2  (or =0 or =1)
 
 
-** UPDATING ALREADY EXISTING LOCAL GIT REPO WITH NEW CHANGES **
+**** UPDATING LOCAL GIT REPO WITH NEW CHANGES ****
 
-- goto into main repo dir
+- go into local git repo 
 cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
 
 - update local files with new changes
