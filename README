@@ -1,6 +1,6 @@
 2011-11-28
 
-Original Realtek RTL2832U chipset (DVB/DAB/DAB) +Linux 2.6.x driver rel. 2.2.2 , "full" version
+Original Realtek RTL2832U chipset (DVB/DAB) +Linux 2.6.x driver rel. 2.2.2 , "full" version
 
 Thanks to Realtek
 
@@ -8,8 +8,11 @@ Thanks to Xgazza
 Thanks to Skaman
 Thanks to Gennar1
 
-This driver is the "full" version using DVB-T , DVB-C ,  DTMB and 10 tuners
-patched for Linux kernel 3.0.0 (Ubuntu Oneiric)
+This driver is the "full" version using DVB-T, DVB-C, DTMB and 10 tuners
+It looks to work also with DAB/DAB+ digital radio stick as Terratec NOXON DAB
+
+Diver patched for Linux kernel 3.0.0 (Ubuntu Oneiric)
+
 
 !! WORK IN PROGRESS , ALPHA STATE !!
 
