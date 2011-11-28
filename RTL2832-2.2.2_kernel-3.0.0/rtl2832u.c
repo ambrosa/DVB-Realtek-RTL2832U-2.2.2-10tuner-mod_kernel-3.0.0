@@ -79,7 +79,7 @@ static struct rc_map_table rtl2832u_rc_keys_map_table[] = {
 	};
 */
 
-/* Xgazza remote control key table */
+/* Xgazza remote control Ubuntu 11.10 key map */
 static struct rc_map_table rtl2832u_rc_keys_map_table[] = {
 	{ 0x40bf, KEY_POWER2 },        // TV POWER
 	{ 0x08f7, KEY_POWER },         // PC POWER
@@ -615,14 +615,18 @@ static int rtl2832u_rc_query(struct dvb_usb_device *d, u32 *event, int *state)
 					ret=-1;
 					goto error;	
 			}
-			scancode=(ucode[2]<<8) | ucode[3];
+			scancode=(ucode[2]<<8) | ucode[3] ;
 			deb_info("-%s scan code %x %x %x %x,(0x%x) -- len=%d\n", __FUNCTION__,ucode[0],ucode[1],ucode[2],ucode[3],scancode,byte_count);
-
 			////////// map/////////////////////////////////////////////////////////////////////////////////////////////////////
 			tableSize = ARRAY_SIZE(rtl2832u_rc_keys_map_table);
 			for (i = 0; i < tableSize; i++) {
 				if(rtl2832u_rc_keys_map_table[i].scancode == scancode ){
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 					*event = rtl2832u_rc_keys_map_table[i].keycode;
+#else
+					*event = rtl2832u_rc_keys_map_table[i].event;
+#endif	
+
 					*state = REMOTE_KEY_PRESSED;
 					deb_rc("%s : map number = %d \n", __FUNCTION__,i);	
 					break;
@@ -856,17 +860,17 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
 	},
 	
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
-		.rc_query     = rtl2832u_rc_query,                 //use define quary function
-		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
+		.rc_query         = rtl2832u_rc_query,				//use define quary function
+		.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
-	
 	
 	.num_device_descs = 9,
 	.devices = {
@@ -937,13 +941,14 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1022,13 +1027,14 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
 
 
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1107,13 +1113,14 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1196,13 +1203,14 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1285,13 +1293,14 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
 		}
 	},
 	 /*remote control*/
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1373,13 +1382,14 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1456,13 +1466,14 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
@@ -1539,13 +1550,14 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 		}
 	},
 	//remote control
-	//.rc_interval      = RT_RC_POLLING_INTERVAL_TIME_MS,		
-	//.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
-	//.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
-	//.rc_query         = rtl2832u_rc_query,				//use define quary function
 	.rc.legacy = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
 		.rc_map_table = rtl2832u_rc_keys_map_table,             //user define key map
 		.rc_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table), //user define key map size	
+#else
+		.rc_key_map       = rtl2832u_rc_keys_map_table,			//user define key map
+		.rc_key_map_size  = ARRAY_SIZE(rtl2832u_rc_keys_map_table),	//user define key map size	
+#endif	
 		.rc_query     = rtl2832u_rc_query,                 //use define quary function
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
