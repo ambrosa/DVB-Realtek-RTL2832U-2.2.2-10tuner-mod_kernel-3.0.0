@@ -11,7 +11,10 @@ Thanks to Gennar1
 This driver is the "full" version using DVB-T, DVB-C, DTMB and 10 tuners
 It looks to work also with DAB/DAB+ digital radio stick as Terratec NOXON DAB
 
-Driver patched for Linux kernel 3.0.0 (Ubuntu Oneiric)
+Driver patched for Linux kernel 3.0.0 (Ubuntu Oneiric), 3.1.0 and 3.2.0 (Thanks Hans-Frieder Vogt)
+Can compile with kernel 2.6.x (2.6.x-3.0.0 main differences are about handling RC)
+
+Main thread about OpenPli project: http://openpli.org/forums/topic/20899-rtl2832u-chipset-support-proposal/
 
 
 !! WORK IN PROGRESS , ALPHA STATE !!
