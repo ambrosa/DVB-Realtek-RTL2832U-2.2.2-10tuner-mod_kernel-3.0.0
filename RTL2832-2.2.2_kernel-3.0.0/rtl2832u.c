@@ -693,7 +693,13 @@ error:
 
 static int rtl2832u_frontend_attach(struct dvb_usb_adapter *adap)
 {
-	adap->fe = rtl2832u_fe_attach(adap->dev); 
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+          adap->fe_adap[0].fe = rtl2832u_fe_attach(adap->dev);
+#else
+          adap->fe = rtl2832u_fe_attach(adap->dev);
+#endif
+
 	return 0;
 }
 
@@ -838,10 +844,21 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -856,6 +873,11 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
 	
@@ -920,10 +942,21 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -938,8 +971,14 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1003,10 +1042,21 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1021,10 +1071,13 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
-	
-
 
 	//remote control
 	.rc.legacy = {
@@ -1092,10 +1145,21 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1110,8 +1174,14 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1182,10 +1252,21 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1200,8 +1281,14 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1272,10 +1359,21 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1290,8 +1388,14 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	 /*remote control*/
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1361,10 +1465,21 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1379,8 +1494,14 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1445,10 +1566,21 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1463,8 +1595,14 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
@@ -1529,10 +1667,21 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 	.num_adapters = 1,
 	.adapter = 
 	{
-		{
-			.streaming_ctrl = rtl2832u_streaming_ctrl,
-			.frontend_attach = rtl2832u_frontend_attach,
-			.fe_ioctl_override = rtl2832u_ioctl_override,
+			{
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+                       .num_frontends = 1,
+                       .fe = {{
+#endif
+
+                       .streaming_ctrl = rtl2832u_streaming_ctrl,
+                       .frontend_attach = rtl2832u_frontend_attach,
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+                       .fe_ioctl_override = rtl2832u_ioctl_override,
+#endif
+
 			//parameter for the MPEG2-data transfer 
 			.stream = 
 			{
@@ -1547,8 +1696,14 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 					}
 				}
 			},
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+                          }},
+#endif
+
 		}
 	},
+
 	//remote control
 	.rc.legacy = {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3,0,0)
