@@ -6,9 +6,11 @@
 
 #include "dvb-usb.h"
 
-#define	USB_VID_REALTEK						0x0BDA
-#define	USB_PID_RTL2832_WARM				0x2832 
-#define	USB_PID_RTL2838_WARM				0x2838 
+#ifndef USB_VID_REALTEK
+	#define	USB_VID_REALTEK						0x0BDA
+#endif
+#define	USB_PID_RTL2832_WARM					0x2832 
+#define	USB_PID_RTL2838_WARM					0x2838 
 #define	USB_PID_RTL2836_WARM					0x2836
 #define	USB_PID_RTL2839_WARM					0x2839
 #define	USB_PID_RTL2840_WARM					0x2840
@@ -24,8 +26,9 @@
 #define	USB_PID_RTL2824_WARM					0x2824 
 #define	USB_PID_RTL2825_WARM          			0x2825
 
-
-#define	USB_VID_DEXATEK						0x1D19
+#ifndef USB_VID_DEXATEK
+	#define	USB_VID_DEXATEK						0x1D19
+#endif
 #define	USB_PID_DEXATEK_1101					0x1101
 #define	USB_PID_DEXATEK_1102					0x1102
 #define	USB_PID_DEXATEK_1103					0x1103
@@ -40,67 +43,77 @@
 #define	USB_PID_DEXATEK_3103					0x3103
 #define	USB_PID_DEXATEK_9202					0x9202
 
+#ifndef USB_VID_TERRATEC
+	#define USB_VID_TERRATEC					0x0CCD
+#endif
+#define	USB_PID_TERRATEC_00A9					0x00A9
+#define	USB_PID_TERRATEC_00B3					0x00B3
 
-#define	USB_PID_TERRATEC_00A9				0x00A9
-#define	USB_PID_TERRATEC_00B3				0x00B3
+#ifndef USB_VID_AZUREWAVE_2
+	#define	USB_VID_AZUREWAVE_2					0x13D3
+#endif
+	#define	USB_PID_AZUREWAVE_3234				0x3234
+	#define	USB_PID_AZUREWAVE_3274				0x3274
+	#define	USB_PID_AZUREWAVE_3282				0x3282
 
 
-#define	USB_VID_AZUREWAVE_2					0x13D3
-#define	USB_PID_AZUREWAVE_3234				0x3234
-#define	USB_PID_AZUREWAVE_3274				0x3274
-#define	USB_PID_AZUREWAVE_3282				0x3282
-
-
-#define	USB_VID_THP							0x1554
+#ifndef USB_VID_THP
+	#define	USB_VID_THP							0x1554
+#endif
 #define	USB_PID_THP_5013						0x5013
 #define	USB_PID_THP_5020						0x5020	
 #define	USB_PID_THP_5026						0x5026	
 
+#ifndef USB_VID_KWORLD_1ST
+	#define	USB_VID_KWORLD_1ST					0x1B80
+#endif
+#define	USB_PID_KWORLD_D393						0xD393
+#define	USB_PID_KWORLD_D394						0xD394
+#define	USB_PID_KWORLD_D395						0xD395
+#define	USB_PID_KWORLD_D396						0xD396
+#define	USB_PID_KWORLD_D397						0xD397
+#define	USB_PID_KWORLD_D398						0xD398
+#define	USB_PID_KWORLD_D39A						0xD39A
+#define	USB_PID_KWORLD_D39B						0xD39B
+#define	USB_PID_KWORLD_D39C						0xD39C
+#define	USB_PID_KWORLD_D39E						0xD39E
+#define	USB_PID_KWORLD_E77B						0xE77B
+#define	USB_PID_KWORLD_D3A1						0xD3A1
+#define	USB_PID_KWORLD_D3A4						0xD3A4
+#define	USB_PID_KWORLD_E41D						0xE41D
 
-#define	USB_VID_KWORLD_1ST					0x1B80
-#define	USB_PID_KWORLD_D393					0xD393
-#define	USB_PID_KWORLD_D394					0xD394
-#define	USB_PID_KWORLD_D395					0xD395
-#define	USB_PID_KWORLD_D396					0xD396
-#define	USB_PID_KWORLD_D397					0xD397
-#define	USB_PID_KWORLD_D398					0xD398
-#define	USB_PID_KWORLD_D39A					0xD39A
-#define	USB_PID_KWORLD_D39B					0xD39B
-#define	USB_PID_KWORLD_D39C					0xD39C
-#define	USB_PID_KWORLD_D39E					0xD39E
-#define	USB_PID_KWORLD_E77B					0xE77B
-#define	USB_PID_KWORLD_D3A1					0xD3A1
-#define	USB_PID_KWORLD_D3A4					0xD3A4
-#define	USB_PID_KWORLD_E41D					0xE41D
+#ifndef USB_VID_GOLDENBRIDGE
+	#define	USB_VID_GOLDENBRIDGE				0x1680
+#endif
+#define	USB_PID_GOLDENBRIDGE_WARM				0xA332
+
+#ifndef USB_VID_YUAN
+	#define	USB_VID_YUAN						0x1164
+#endif
+#define	USB_PID_YUAN_WARM						0x6601
+#define USB_PID_YUAN_WARM80						0x3280
+#define USB_PID_YUAN_WARM84	                    0x3284
+
+#ifndef USB_PID_GTEK_WARM_0837
+	#define	USB_PID_GTEK_WARM_0837				0x0837	
+#endif
+#define	USB_PID_GTEK_WARM_A803					0xA803
+#define	USB_PID_GTEK_WARM_B803					0xB803
+#define	USB_PID_GTEK_WARM_C803					0xC803
+#define	USB_PID_GTEK_WARM_D803					0xD803
+#define	USB_PID_GTEK_WARM_C280					0xC280
+#define	USB_PID_GTEK_WARM_D286					0xD286
+#define	USB_PID_GTEK_WARM_0139					0x0139
+#define	USB_PID_GTEK_WARM_A683					0xA683
+
+#ifndef USB_VID_LEADTEK
+	#define	USB_VID_LEADTEK						0x0413
+#endif
+#define	USB_PID_LEADTEK_WARM_1					0x6680
+#define	USB_PID_LEADTEK_WARM_2					0x6F11
 
 
-#define	USB_VID_GOLDENBRIDGE					0x1680	
-#define	USB_PID_GOLDENBRIDGE_WARM			0xA332
-
-
-#define	USB_VID_YUAN							0x1164
-#define	USB_PID_YUAN_WARM					0x6601
-#define USB_PID_YUAN_WARM80				0x3280
-#define USB_PID_YUAN_WARM84	                        0x3284
-
-
-#define	USB_PID_GTEK_WARM_0837				0x0837	
-#define	USB_PID_GTEK_WARM_A803				0xA803
-#define	USB_PID_GTEK_WARM_B803				0xB803
-#define	USB_PID_GTEK_WARM_C803				0xC803
-#define	USB_PID_GTEK_WARM_D803				0xD803
-#define	USB_PID_GTEK_WARM_C280				0xC280
-#define	USB_PID_GTEK_WARM_D286				0xD286
-#define	USB_PID_GTEK_WARM_0139				0x0139
-#define	USB_PID_GTEK_WARM_A683				0xA683
-
-
-#define	USB_VID_LEADTEK						0x0413
-#define	USB_PID_LEADTEK_WARM_1				0x6680
-#define	USB_PID_LEADTEK_WARM_2				0x6F11
-
-
-#ifndef  USB_VID_COMPRO/*define in dvb-usb-ids.h*/                                 
+#ifndef  USB_VID_COMPRO
 	#define USB_VID_COMPRO						0x185B
 #endif 
 #define USB_PID_COMPRO_WARM_0620				0x0620
@@ -113,6 +126,7 @@
 #define USB_PID_COMPRO_WARM_9540				0x9540
 #define USB_PID_COMPRO_WARM_9530				0x9530
 #define USB_PID_COMPRO_WARM_9520				0x9520
+
 
 #define RTD2831_URB_SIZE				4096// 39480
 #define RTD2831_URB_NUMBER				10 //  4
