@@ -1,4 +1,4 @@
-2011-11-28
+2011-11-29
 
 Original Realtek RTL2832U chipset (DVB/DAB) Linux 2.6.x driver rel. 2.2.2 , "full" version
 
@@ -21,10 +21,10 @@ Main thread about OpenPli project: http://openpli.org/forums/topic/20899-rtl2832
 
 
 Tested with:
- Xubuntu 11.10 64bit + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
- Lubuntu 11.10 32bit + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
- OpenPli 2011-11-27 ClarkeTech ET9100 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
-
+ Xubuntu 11.10 64bit kernel 3.0 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
+ Lubuntu 11.10 32bit kernel 3.0 (cpu 64bit) + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
+ OpenPli 2011-11-27 ClarkeTech ET9100 (cpu Broadcom) kernel 3.1 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
+ Debian testing 32bit (cpu 64bit) kernel 3.1 + Dexatek TX Hollywood (ID 1d09:1101) : compile OK, works OK
 
 Some DVB-T stick equipped with rtl2832:
   DIKOM USB-DVBT HD (ID 1b80:d394)
@@ -47,7 +47,7 @@ sudo apt-get install linux-headers-$(uname -r)
 sudo apt-get install git
 
 - clone this repo using git
-git clone git@github.com:ambrosa/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0.git 
+git clone https://github.com/ambrosa/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0.git 
 
 - goto into source dir
 cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
