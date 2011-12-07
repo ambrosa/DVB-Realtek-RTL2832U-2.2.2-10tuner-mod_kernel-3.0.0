@@ -1,4 +1,4 @@
-2011-11-30
+2011-11-07
 
 Original Realtek RTL2832U chipset (DVB/DAB) Linux 2.6.x driver rel. 2.2.2 , "full" version
 
@@ -11,7 +11,7 @@ Thanks to Gennar1
 This driver is the "full" version using DVB-T, DVB-C, DTMB and 10 tuners
 It looks to work also with DAB/DAB+ digital radio stick as Terratec NOXON DAB
 
-Driver patched for Linux kernel 3.0.0 (Ubuntu Oneiric), 3.1.0 and 3.2.0 (Thanks Hans-Frieder Vogt)
+Driver patched for Linux kernel 3.0.0 (Ubuntu Oneiric), 3.1.0 and 3.2.0 (Thanks Hans-Frieder Vogt and Gennar1)
 Can compile with kernel 2.6.x (2.6.x-3.0.0 main differences are about handling RC)
 
 Main thread about OpenPli project: http://openpli.org/forums/topic/20899-rtl2832u-chipset-support-proposal/
@@ -25,6 +25,7 @@ Tested with:
  Lubuntu 11.10 32bit kernel 3.0 (cpu 64bit) + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
  OpenPli 2011-11-27 ClarkeTech ET9100 (cpu Broadcom) kernel 3.1 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
  Debian testing 32bit (cpu 64bit) kernel 3.1 + Dexatek TX Hollywood (ID 1d09:1101) : compile OK, works OK
+ Xubuntu 11.10 64bit kernel 3.2.0-RC4 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
 
 Some DVB-T stick equipped with rtl2832:
   DIKOM USB-DVBT HD (ID 1b80:d394)
@@ -52,6 +53,8 @@ git clone https://github.com/ambrosa/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kern
 - goto into source dir
 cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
 cd RTL2832-2.2.2_kernel-3.0.0
+
+- edit Makefile, option INCLUDE_EXTRA_DVB (choose which include file set)
 
 - compile code
 make clean

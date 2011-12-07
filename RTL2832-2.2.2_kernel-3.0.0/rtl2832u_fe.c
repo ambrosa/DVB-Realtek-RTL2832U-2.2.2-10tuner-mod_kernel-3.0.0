@@ -1937,6 +1937,8 @@ rtl2832_read_ber(
 	struct rtl2832_state* p_state = fe->demodulator_priv;
 	unsigned  long ber_num, ber_dem;
 
+	deb_info(" +%s\n", __FUNCTION__);
+
 	if( p_state->pNim== NULL)
 	{
 		deb_info(" %s pNim = NULL \n", __FUNCTION__);
@@ -1948,7 +1950,8 @@ rtl2832_read_ber(
 
 	if(p_state->demod_type == RTL2832)
 	{
-		if( p_state->pNim->GetBer( p_state->pNim , &ber_num , &ber_dem) ) 
+	
+	if( p_state->pNim->GetBer( p_state->pNim , &ber_num , &ber_dem) ) 
 		{
 			*ber = 19616;
 			goto error;
@@ -1993,13 +1996,14 @@ rtl2832_read_ber(
 	}
 
 	mutex_unlock(&p_state->i2c_repeater_mutex);
-		
+	deb_info(" -%s\n", __FUNCTION__);
 	return 0;
 	
 error:
 	mutex_unlock(&p_state->i2c_repeater_mutex);
 	
 mutex_error:
+	deb_info(" -%s ERROR\n", __FUNCTION__);
 	return -1;
 }
 static int fc0012_get_signal_strength(struct rtl2832_state	*p_state,unsigned long *strength)
@@ -2016,6 +2020,7 @@ static int fc0012_get_signal_strength(struct rtl2832_state	*p_state,unsigned lon
 	TUNER_MODULE *pTuner=NULL;
 	DVBT_DEMOD_MODULE *pDemod = NULL;	
 	
+	deb_info(" +%s\n", __FUNCTION__);
 
 	if(p_state->pNim== NULL)
 	{
@@ -2080,8 +2085,10 @@ static int fc0012_get_signal_strength(struct rtl2832_state	*p_state,unsigned lon
 			*strength=0;
 	else
 			*strength = ((Power+45)*100)/50+100;
+	deb_info(" -%s\n", __FUNCTION__);
 	return 0;
 error:
+	deb_info(" -%s ERROR\n", __FUNCTION__);
 	return -1;	
 }
 int 
@@ -2091,6 +2098,8 @@ rtl2832_read_signal_strength(
 {
 	struct rtl2832_state* p_state = fe->demodulator_priv;
 	unsigned long		_strength;
+	
+	deb_info(" +%s\n", __FUNCTION__);
 
 	if( p_state->pNim== NULL)
 	{
@@ -2165,13 +2174,15 @@ rtl2832_read_signal_strength(
 	
 
 	mutex_unlock(&p_state->i2c_repeater_mutex);
-	
+
+	deb_info(" -%s\n", __FUNCTION__);
 	return 0;
 	
 error:
 	mutex_unlock(&p_state->i2c_repeater_mutex);
 	
 mutex_error:
+	deb_info(" -%s ERROR\n", __FUNCTION__);
 	return -1;
 }
 
@@ -2184,6 +2195,7 @@ rtl2832_read_signal_quality(
 	struct rtl2832_state* p_state = fe->demodulator_priv;
 	unsigned long		_quality;
 
+	deb_info(" +%s\n", __FUNCTION__);
 	if( p_state->pNim== NULL)
 	{
 		deb_info(" %s pNim = NULL \n", __FUNCTION__);
@@ -2234,13 +2246,14 @@ rtl2832_read_signal_quality(
 	deb_info("  %s : quality = 0x%x \n", __FUNCTION__, *quality);	
 
 	mutex_unlock(&p_state->i2c_repeater_mutex);
-	
+	deb_info(" -%s\n", __FUNCTION__);
 	return 0;
 	
 error:
 	mutex_unlock(&p_state->i2c_repeater_mutex);
 	
 mutex_error:
+	deb_info(" -%s ERROR\n", __FUNCTION__);
 	return -1;	
 }
 
@@ -2256,6 +2269,7 @@ rtl2832_read_snr(
 	long snr_dem = 0;
 	long _snr= 0;
 
+	deb_info(" +%s\n", __FUNCTION__);
 	if( p_state->pNim== NULL)
 	{
 		deb_info(" %s pNim = NULL \n", __FUNCTION__);
@@ -2320,6 +2334,7 @@ error:
 	mutex_unlock(&p_state->i2c_repeater_mutex);
 	
 mutex_error:
+	deb_info(" -%s ERROR\n", __FUNCTION__);
 	return -1;
 }
 

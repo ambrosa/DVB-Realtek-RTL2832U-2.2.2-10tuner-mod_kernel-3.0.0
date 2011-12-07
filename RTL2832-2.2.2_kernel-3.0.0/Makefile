@@ -1,12 +1,18 @@
-# Copyright (C) 2011 Xgaz <xgazza@inwind.it>
 # License: GPL
 # RTL2832U Driver
 
+# Choose here wich include file to use: from kernel 3.0.0 (good for 3.1.0) or from kernel 3.2.0
+
+# kernel 3.0.0 / 3.1.0
+INCLUDE_EXTRA_DVB := include-300
+
+# kernel 3.2.0
+#INCLUDE_EXTRA_DVB := include-320
+
+# ----------------------------------------
 
 # current dir
 SOURCEDIR := $(PWD)
-
-# ----------------------------------------
 
 dvb-usb-rtl2832u-objs := demod_rtl2832.o dvbt_demod_base.o dvbt_nim_base.o \
 	foundation.o math_mpi.o nim_rtl2832_mxl5007t.o nim_rtl2832_fc2580.o \
@@ -22,11 +28,11 @@ dvb-usb-rtl2832u-objs := demod_rtl2832.o dvbt_demod_base.o dvbt_nim_base.o \
 
 obj-m += dvb-usb-rtl2832u.o
 
-EXTRA_CFLAGS += -I$(SOURCEDIR)/include/ \
-		-I$(KBUILD_SRC)/drivers/media/dvb/dvb-usb/ \
+EXTRA_CFLAGS += -I$(KBUILD_SRC)/drivers/media/dvb/dvb-usb/ \
 		-I$(KBUILD_SRC)/drivers/media/dvb/dvb-core/ \
 		-I$(KBUILD_SRC)/drivers/media/dvb/frontends/ \
-		-I$(KBUILD_SRC)/drivers/media/common/tuners/
+		-I$(KBUILD_SRC)/drivers/media/common/tuners/ \
+		-I$(SOURCEDIR)/$(INCLUDE_EXTRA_DVB) 
 
 KINS = /lib/modules
 KDIR = /usr/src/linux-headers-`uname -r`

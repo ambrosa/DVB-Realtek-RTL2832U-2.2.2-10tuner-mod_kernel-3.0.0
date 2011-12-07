@@ -6,6 +6,10 @@
 #include "rtl2832u_io.h"
 #include "rtl2832u_ioctl.h"
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)) || ((defined V4L2_VERSION) && (V4L2_VERSION >= 196608))
+#define V4L2_REFACTORED_MFE_CODE
+#endif
+
 
 int dvb_usb_rtl2832u_debug=0;
 module_param_named(debug,dvb_usb_rtl2832u_debug, int, 0644);
@@ -694,7 +698,7 @@ error:
 static int rtl2832u_frontend_attach(struct dvb_usb_adapter *adap)
 {
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
           adap->fe_adap[0].fe = rtl2832u_fe_attach(adap->dev);
 #else
           adap->fe = rtl2832u_fe_attach(adap->dev);
@@ -846,7 +850,7 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -855,7 +859,7 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -874,7 +878,7 @@ static struct dvb_usb_device_properties rtl2832u_1st_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -944,7 +948,7 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -953,7 +957,7 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -972,7 +976,7 @@ static struct dvb_usb_device_properties rtl2832u_2nd_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1044,7 +1048,7 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1053,7 +1057,7 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1072,7 +1076,7 @@ static struct dvb_usb_device_properties rtl2832u_3th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1147,7 +1151,7 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1156,7 +1160,7 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1175,7 +1179,7 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1254,7 +1258,7 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1263,7 +1267,7 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1282,7 +1286,7 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1361,7 +1365,7 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1370,7 +1374,7 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1389,7 +1393,7 @@ static struct dvb_usb_device_properties rtl2832u_6th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1467,7 +1471,7 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1476,7 +1480,7 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1495,7 +1499,7 @@ static struct dvb_usb_device_properties rtl2832u_7th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1568,7 +1572,7 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1577,7 +1581,7 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1596,7 +1600,7 @@ static struct dvb_usb_device_properties rtl2832u_8th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
@@ -1669,7 +1673,7 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 	{
 			{
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
                        .num_frontends = 1,
                        .fe = {{
@@ -1678,7 +1682,7 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
                        .streaming_ctrl = rtl2832u_streaming_ctrl,
                        .frontend_attach = rtl2832u_frontend_attach,
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,2,0)
+#ifndef V4L2_REFACTORED_MFE_CODE
                        .fe_ioctl_override = rtl2832u_ioctl_override,
 #endif
 
@@ -1697,7 +1701,7 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 				}
 			},
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,2,0)
+#ifdef V4L2_REFACTORED_MFE_CODE
                           }},
 #endif
 
