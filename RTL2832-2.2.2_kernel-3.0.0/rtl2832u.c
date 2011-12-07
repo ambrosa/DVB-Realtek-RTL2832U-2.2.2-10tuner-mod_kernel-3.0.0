@@ -15,7 +15,6 @@ int dvb_usb_rtl2832u_debug=0;
 module_param_named(debug,dvb_usb_rtl2832u_debug, int, 0644);
 MODULE_PARM_DESC(debug, "Set debugging level (0=disable, 1=info, 2=xfer, 4=rc (or-able)), default=0");
 
-
 int demod_default_type=0;
 module_param_named(demod, demod_default_type, int, 0644);
 MODULE_PARM_DESC(demod, "Set default demod type (0=dvb-t, 1=dtmb, 2=dvb-c), default=0");
@@ -31,6 +30,10 @@ MODULE_PARM_DESC(rtl2832u_rc_mode, "Set default rtl2832u_rc_mode (0=rc6, 1=rc5, 
 int dvb_use_rtl2832u_card_type=0;
 module_param_named(rtl2832u_card_type, dvb_use_rtl2832u_card_type, int, 0644);
 MODULE_PARM_DESC(rtl2832u_card_type, "Set default rtl2832u_card_type type (0=dongle, 1=mini card), default=0");
+
+int dvb_usb_rtl2832u_snrdb=0;
+module_param_named(snrdb,dvb_usb_rtl2832u_snrdb, int, 0644);
+MODULE_PARM_DESC(snrdb, "SNR type output (0=16bit, 1=dB decibel), default=0");
 
 
 

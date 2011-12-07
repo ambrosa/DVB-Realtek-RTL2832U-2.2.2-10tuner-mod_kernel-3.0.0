@@ -2286,12 +2286,21 @@ rtl2832_read_snr(
 			goto error;
 		}
 
-		_snr = snr_num / snr_dem;
+		if (dvb_usb_rtl2832u_snrdb == 0) {
+			if (snr_num > 0xffff)
+				snr_num = 0xffff;
+			*snr = snr_num;
+		}
+		else {
+			_snr = snr_num / snr_dem;
+			if( _snr < 0 ) _snr = 0;
 
-		if( _snr < 0 ) _snr = 0;
+			*snr = _snr;
+		}
 
-		*snr = _snr;
-        }
+		//deb_info(" %s SNR_NUM: %lu  SNR_DEM: %lu  SNR=%u\n", __FUNCTION__,snr_num,snr_dem,*snr);			
+	}
+
 	else if(p_state->demod_type == RTL2836)
 	{
         	if( p_state->pNim2836 == NULL)

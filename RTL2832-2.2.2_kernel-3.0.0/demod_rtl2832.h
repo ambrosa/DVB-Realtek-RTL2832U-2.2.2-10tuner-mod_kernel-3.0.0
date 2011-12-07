@@ -72,7 +72,7 @@ int main(void)
 #include "dvbt_demod_base.h"
 
 
-
+extern int dvb_usb_rtl2832u_snrdb;
 
 
 // Definitions

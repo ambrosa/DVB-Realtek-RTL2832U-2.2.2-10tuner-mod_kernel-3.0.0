@@ -908,11 +908,11 @@ rtl2832_GetSnrDb(
 	unsigned long CeEstEvm;
 	int Constellation, Hierarchy;
 
-	static const long SnrDbNumConst[DVBT_CONSTELLATION_NUM][DVBT_HIERARCHY_NUM] =
+	static const long SnrDbNumConst[DVBT_CONSTELLATION_NUM][DVBT_HIERARCHY_NUM+1] =
 	{
-		{122880,	122880,		122880,		122880,		},
-		{146657,	146657,		156897,		171013,		},
-		{167857,	167857,		173127,		181810,		},
+		{122880,	122880,		122880,		122880,	  23,	},
+		{146657,	146657,		156897,		171013,	  26,	},
+		{167857,	167857,		173127,		181810,	  29,	},
 	};
 
 	long Var;
@@ -964,6 +964,13 @@ rtl2832_GetSnrDb(
 	
 	// Set SNR dB denominator.
 	*pSnrDbDen = RTL2832_SNR_DB_DEN;
+
+	if (dvb_usb_rtl2832u_snrdb == 0) {
+		// output SNR as 16bit unsigned int
+		// formula: (65535 / MAX_SNRDB_CONSTELLATION) * SNR
+		*pSnrDbNum = (0xffff / SnrDbNumConst[Constellation][4] ) * (*pSnrDbNum / *pSnrDbDen);
+	}
+		
 
 
 	return FUNCTION_SUCCESS;

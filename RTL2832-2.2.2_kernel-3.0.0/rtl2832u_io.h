@@ -7,6 +7,7 @@
 #include "dvb-usb.h"
 
 extern int dvb_usb_rtl2832u_debug;
+extern int dvb_usb_rtl2832u_snrdb;
 
 // using PRINTK to avoid problem about CONFIG_DVB_USB_DEBUG=n into kernel
 /*
