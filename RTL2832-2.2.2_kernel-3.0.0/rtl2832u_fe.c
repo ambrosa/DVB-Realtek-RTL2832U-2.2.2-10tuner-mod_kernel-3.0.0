@@ -2268,6 +2268,15 @@ rtl2832_read_snr(
 	long snr_num = 0;
 	long snr_dem = 0;
 	long _snr= 0;
+	int pConstellation;
+	int pHierarchy;
+	int pCodeRateLp;
+	int pCodeRateHp;
+	int pGuardInterval;
+	int pFftMode;
+
+	// max dB for each constellation
+	static const int snrMaxDb[DVBT_CONSTELLATION_NUM] = {  23,  26,  29, };
 
 	deb_info(" +%s\n", __FUNCTION__);
 	if( p_state->pNim== NULL)
@@ -2286,19 +2295,22 @@ rtl2832_read_snr(
 			goto error;
 		}
 
-		if (dvb_usb_rtl2832u_snrdb == 0) {
-			if (snr_num > 0xffff)
-				snr_num = 0xffff;
-			*snr = snr_num;
+		if (dvb_usb_rtl2832u_snrdb == 0) 
+		{
+			p_state->pNim->GetTpsInfo(p_state->pNim, &pConstellation, &pHierarchy, &pCodeRateLp, &pCodeRateHp, &pGuardInterval, &pFftMode);
+			_snr = ((snr_num / snr_dem) * 0xffff) / snrMaxDb[pConstellation];
+			if ( _snr > 0xffff ) _snr = 0xffff;
+			if ( _snr < 0 ) _snr = 0;
 		}
-		else {
+		else 
+		{
 			_snr = snr_num / snr_dem;
 			if( _snr < 0 ) _snr = 0;
-
-			*snr = _snr;
 		}
 
-		//deb_info(" %s SNR_NUM: %lu  SNR_DEM: %lu  SNR=%u\n", __FUNCTION__,snr_num,snr_dem,*snr);			
+		*snr = _snr;
+
+		deb_info(" %s SNR_NUM=%lu  SNR_DEM=%lu  SNR=%u  Costellation=%u\n", __FUNCTION__,snr_num,snr_dem,*snr,pConstellation);			
 	}
 
 	else if(p_state->demod_type == RTL2836)

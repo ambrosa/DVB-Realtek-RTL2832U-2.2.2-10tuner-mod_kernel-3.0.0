@@ -138,6 +138,7 @@ BuildRtl2832Fc0012Module(
 	pNim->GetCrOffsetHz     = dvbt_nim_default_GetCrOffsetHz;
 	pNim->GetTpsInfo        = dvbt_nim_default_GetTpsInfo;
 
+
 	// Set NIM module function pointers with particular functions.
 	pNim->Initialize     = rtl2832_fc0012_Initialize;
 	pNim->SetParameters  = rtl2832_fc0012_SetParameters;
