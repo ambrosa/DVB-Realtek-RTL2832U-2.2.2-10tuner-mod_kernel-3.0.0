@@ -1,4 +1,3 @@
-
 #include <linux/module.h>
 #include <linux/version.h>
 
@@ -822,6 +821,7 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 
 	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_1)},		// 60			
 	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_2)},		// 61
+	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_3)},		
 
 	{ USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM)},			//62
         { USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM80)},		//63
