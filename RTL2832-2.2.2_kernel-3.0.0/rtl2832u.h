@@ -1,4 +1,3 @@
-
 #ifndef _RTL2832U_H_
 #define _RTL2832U_H_
 
@@ -111,6 +110,7 @@
 #endif
 #define	USB_PID_LEADTEK_WARM_1					0x6680
 #define	USB_PID_LEADTEK_WARM_2					0x6F11
+#define	USB_PID_LEADTEK_WARM_3					0x6A03
 
 
 #ifndef  USB_VID_COMPRO
