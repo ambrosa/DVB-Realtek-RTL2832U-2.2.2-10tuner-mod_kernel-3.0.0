@@ -1862,7 +1862,7 @@ tmErrorCode_t
 tmbslTDA182I2GetPowerLevel
 (
     tmUnitSelect_t  tUnit,      /* I: Unit number */
-    UInt32*         pPowerLevel /* O: Power Level in dBµV */
+    UInt32*         pPowerLevel /* O: Power Level in dBuV */
 )
 {
     ptmTDA182I2Object_t pObj = Null;
