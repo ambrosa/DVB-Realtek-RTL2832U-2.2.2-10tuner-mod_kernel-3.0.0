@@ -21,6 +21,8 @@
 
 #include "rtl2832u_io.h"
 #include <linux/param.h>
+#include <linux/module.h>
+#include <linux/version.h>
 
 #define  UPDATE_FUNC_ENABLE_2840      0
 #define  UPDATE_FUNC_ENABLE_2836      1
@@ -52,8 +54,12 @@ struct rtl2832_state {
 
 	struct mutex					i2c_repeater_mutex;
 
-       unsigned long					current_frequency;	
-	enum fe_bandwidth			current_bandwidth;		
+	unsigned long					current_frequency;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+	u32						current_bandwidth;
+#else
+	enum fe_bandwidth				current_bandwidth;
+#endif
 	   
 	RTL2832_TUNER_TYPE			tuner_type;
 	unsigned char					is_mt2266_nim_module_built;  //3 For close MT handle
