@@ -1,3 +1,4 @@
+#include <linux/version.h>
 
 #include "rtl2832u_fe.h"
 #include "rtl2832u_io.h"
@@ -973,13 +974,23 @@ error:
 }
 
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
 static int 
 check_dvbt_reset_parameters(
 
 	struct rtl2832_state*	p_state,
 	unsigned long			frequency,
-	enum fe_bandwidth	bandwidth,	
+	unsigned long			bandwidth,
 	int*					reset_needed)
+#else
+static int 
+check_dvbt_reset_parameters(
+
+	struct rtl2832_state*	p_state,
+	unsigned long			frequency,
+	enum fe_bandwidth			bandwidth,
+	int*					reset_needed)
+#endif
 {
 
 	int							is_lock;	
@@ -1499,15 +1510,31 @@ rtl2832_sleep(
 
 
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+static int
+rtl2840_set_parameters(
+	struct dvb_frontend*	fe)
+#else
 static int
 rtl2840_set_parameters(
 	struct dvb_frontend*	fe,
 	struct dvb_frontend_parameters*	param)
+#endif
 {
 
 	struct rtl2832_state				*p_state = fe->demodulator_priv;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+	struct dtv_frontend_properties		*fep = &fe->dtv_property_cache;
+
+	unsigned long				frequency = fep->frequency;
+	u32					symbol_rate = fep->symbol_rate;
+	fe_modulation_t				modulation = fep->modulation;
+#else
 	struct dvb_qam_parameters 		*p_qam_param= &param->u.qam;
-	unsigned long						frequency = param->frequency;
+	unsigned long				frequency = param->frequency;
+	u32					symbol_rate = p_qam_param->symbol_rate;
+	fe_modulation_t				modulation = p_qam_param->modulation;
+#endif
 
 	DVBT_DEMOD_MODULE				*pDemod2832;
 	int								QamMode;
@@ -1522,11 +1549,11 @@ rtl2840_set_parameters(
 	 }
 
 
-	deb_info(" +%s Freq=%lu , Symbol rate=%u, QAM=%u\n", __FUNCTION__, frequency, p_qam_param->symbol_rate, p_qam_param->modulation);
+	deb_info(" +%s Freq=%lu , Symbol rate=%u, QAM=%u\n", __FUNCTION__, frequency, symbol_rate, modulation);
 
 	pDemod2832 = p_state->pNim->pDemod;
 
-	switch(p_qam_param->modulation)
+	switch(modulation)
 	{
 		case QPSK :		QamMode = QAM_QAM_4;		break;
 		case QAM_16 :	QamMode = QAM_QAM_16;		break;
@@ -1548,7 +1575,7 @@ rtl2840_set_parameters(
 	// Enable demod DVBT_IIC_REPEAT.
 	if(pDemod2832->SetRegBitsWithPage(pDemod2832,  DVBT_IIC_REPEAT, 0x1) )   goto error;	
 	
-	p_state->pNim2840->SetParameters(p_state->pNim2840, frequency, QamMode, p_qam_param->symbol_rate, QAM_ALPHA_0P15);
+	p_state->pNim2840->SetParameters(p_state->pNim2840, frequency, QamMode, symbol_rate, QAM_ALPHA_0P15);
 
 	// Disable demod DVBT_IIC_REPEAT.
 	if(pDemod2832->SetRegBitsWithPage(pDemod2832, DVBT_IIC_REPEAT, 0x0))  goto error;
@@ -1573,15 +1600,29 @@ mutex_error:
 
 
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+static int
+rtl2832_set_parameters(
+	struct dvb_frontend*	fe)
+#else
 static int
 rtl2832_set_parameters(
 	struct dvb_frontend*	fe,
 	struct dvb_frontend_parameters*	param)
+#endif
 {
 	struct rtl2832_state			*p_state = fe->demodulator_priv;
-	struct dvb_ofdm_parameters	*p_ofdm_param= &param->u.ofdm;
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+	struct dtv_frontend_properties		*fep = &fe->dtv_property_cache;
 
-	unsigned long					frequency = param->frequency;
+	unsigned long				frequency = fep->frequency;
+	u32					bandwidth = fep->bandwidth_hz;
+#else
+	struct dvb_ofdm_parameters		*p_ofdm_param= &param->u.ofdm;
+	unsigned long				frequency = param->frequency;
+	enum fe_bandwidth			bandwidth = p_ofdm_param->bandwidth;
+#endif
+
 	int							bandwidth_mode;
 	int							is_signal_present;
 	int							reset_needed;
@@ -1608,11 +1649,11 @@ rtl2832_set_parameters(
 
 	if( mutex_lock_interruptible(&p_state->i2c_repeater_mutex) )	goto mutex_error;
 	
-	deb_info(" +%s frequency = %lu , bandwidth = %u\n", __FUNCTION__, frequency ,p_ofdm_param->bandwidth);
+	deb_info(" +%s frequency = %lu , bandwidth = %u\n", __FUNCTION__, frequency, bandwidth);
 
 	if(p_state->demod_type == RTL2832)
 	{
-		if ( check_dvbt_reset_parameters( p_state , frequency , p_ofdm_param->bandwidth, &reset_needed) ) goto error;
+		if ( check_dvbt_reset_parameters( p_state , frequency , bandwidth, &reset_needed) ) goto error;
 
 		if( reset_needed == 0 )
 		{
@@ -1620,7 +1661,25 @@ rtl2832_set_parameters(
 			return 0;
 		}
 
-		switch (p_ofdm_param->bandwidth) 
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+		switch (fep->bandwidth_hz)
+	      {
+		case 6000000:
+		bandwidth_mode = DVBT_BANDWIDTH_6MHZ;
+		break;
+
+		case 7000000:
+		bandwidth_mode = DVBT_BANDWIDTH_7MHZ;
+		break;
+
+		case 8000000:
+		default:
+		bandwidth_mode = DVBT_BANDWIDTH_8MHZ;
+		break;
+	       }
+#else
+		switch (bandwidth)
 	      {
 		case BANDWIDTH_6_MHZ:
 		bandwidth_mode = DVBT_BANDWIDTH_6MHZ; 	
@@ -1635,6 +1694,7 @@ rtl2832_set_parameters(
 		bandwidth_mode = DVBT_BANDWIDTH_8MHZ;	
 		break;
 	       }
+#endif
 	       
 	       	//add by Dean
 	        if (p_state->tuner_type == RTL2832_TUNER_TYPE_FC0012 )
@@ -1790,7 +1850,7 @@ rtl2832_set_parameters(
 //#endif
 	
 	p_state->current_frequency = frequency;	
-	p_state->current_bandwidth = p_ofdm_param->bandwidth;	
+	p_state->current_bandwidth = bandwidth;
 
 	deb_info(" -%s \n", __FUNCTION__);
 
@@ -1813,10 +1873,16 @@ mutex_error:
 
 
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+static int 
+rtl2832_get_parameters(
+	struct dvb_frontend*	fe)
+#else
 static int 
 rtl2832_get_parameters(
 	struct dvb_frontend*	fe,
 	struct dvb_frontend_parameters*	param)
+#endif
 {
 	//struct rtl2832_state* p_state = fe->demodulator_priv;
 	return 0;
@@ -2504,6 +2570,9 @@ error:
 
 
 static struct dvb_frontend_ops rtl2840_dvbc_ops = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+    .delsys = { SYS_DVBT },
+#endif
     .info = {
         .name               = "Realtek DVB-C RTL2840 ",
         .type               = FE_QAM,
@@ -2540,6 +2609,9 @@ static struct dvb_frontend_ops rtl2840_dvbc_ops = {
 
 
 static struct dvb_frontend_ops rtl2832_dvbt_ops = {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0)
+    .delsys = { SYS_DVBT },
+#endif
     .info = {
         .name               = "Realtek DVB-T RTL2832",
         .type               = FE_OFDM,

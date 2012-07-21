@@ -4,7 +4,7 @@
 # Choose here wich include file to use: from kernel 3.0.0 (good for 3.1.0) or from kernel 3.2.0
 
 # kernel 3.0.0 / 3.1.0
-INCLUDE_EXTRA_DVB := include-300
+INCLUDE_EXTRA_DVB := include-340
 
 # kernel 3.2.0
 #INCLUDE_EXTRA_DVB := include-320
@@ -32,7 +32,8 @@ EXTRA_CFLAGS += -I$(KBUILD_SRC)/drivers/media/dvb/dvb-usb/ \
 		-I$(KBUILD_SRC)/drivers/media/dvb/dvb-core/ \
 		-I$(KBUILD_SRC)/drivers/media/dvb/frontends/ \
 		-I$(KBUILD_SRC)/drivers/media/common/tuners/ \
-		-I$(SOURCEDIR)/$(INCLUDE_EXTRA_DVB) 
+		-I$(SOURCEDIR)/$(INCLUDE_EXTRA_DVB) \
+		-D__DVB_CORE__
 
 KINS = /lib/modules
 KDIR = /usr/src/linux-headers-`uname -r`
