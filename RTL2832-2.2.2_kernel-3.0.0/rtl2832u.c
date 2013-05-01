@@ -821,7 +821,6 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 
 	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_1)},		// 60			
 	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_2)},		// 61
-	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_3)},		
 
 	{ USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM)},			//62
         { USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM80)},		//63
@@ -839,6 +838,8 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 	{ USB_DEVICE(USB_VID_COMPRO,  USB_PID_COMPRO_WARM_9520)},	// 74
 	
 	{ USB_DEVICE(USB_VID_GOLDENBRIDGE, USB_PID_GOLDENBRIDGE_WARM)},	//75	
+	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_3)},		// 76
+	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D7)},	// 77
 													
 	{ 0 },
 };
@@ -1724,7 +1725,7 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
 	
-	.num_device_descs = 4,
+	.num_device_descs = 6,
 	.devices = {
 		{
 		  .name ="VideoMate DTV",
@@ -1743,6 +1744,14 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 		{ .name = "DVB-T TV Stick",
 		  .cold_ids = { NULL, NULL },
 		  .warm_ids = { &rtl2832u_usb_table[75], NULL },
+		},
+		{ .name = "USB DVB-T Device",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[76], NULL },
+		},
+		{ .name = "Terratex T Stick+",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[77], NULL },
 		},
 		{ NULL },				
 	}
