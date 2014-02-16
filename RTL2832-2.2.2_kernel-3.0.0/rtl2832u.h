@@ -47,6 +47,7 @@
 #endif
 #define	USB_PID_TERRATEC_00A9					0x00A9
 #define	USB_PID_TERRATEC_00B3					0x00B3
+#define USB_PID_TERRATEC_00D3                   0x00D3
 
 #ifndef USB_VID_AZUREWAVE_2
 	#define	USB_VID_AZUREWAVE_2					0x13D3
