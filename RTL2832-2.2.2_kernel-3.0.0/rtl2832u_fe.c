@@ -903,6 +903,13 @@ check_tuner_type(
 				
 		deb_force("RTL2832U %s : FC0013 tuner on board...\n", __FUNCTION__);	
 	}	
+	else if ((!read_tuner_id_register(p_state, R820T_BASE_ADDRESS , R820T_CHECK_ADDRESS,  tuner_id_data, LEN_1_BYTE)) &&
+			(tuner_id_data[0] == R820T_CHECK_VALUE))
+	{
+		p_state->tuner_type = RTL2832_TUNER_TYPE_R820T;
+				
+		deb_info(" -%s : R820T tuner on board...\n", __FUNCTION__);	
+	}	
 	else
 	{
 		p_state->tuner_type = RTL2832_TUNER_TYPE_UNKNOWN;
@@ -3419,6 +3426,32 @@ build_2832_nim_module(
 		deb_info(" %s BuildRtl2832Fc0013Module\n", __FUNCTION__);	
 
 	}
+	else if(p_state->tuner_type == RTL2832_TUNER_TYPE_R820T)
+	{
+		//3Build RTL2832 R820T NIM module.
+		BuildRtl2832R820tModule(
+			&p_state->pNim,
+			&p_state->DvbtNimModuleMemory,
+
+			2,								// Maximum I2C reading byte number is 9.
+			2,								// Maximum I2C writing byte number is 8.
+			custom_i2c_read,					// Employ CustomI2cRead() as basic I2C reading function.
+			custom_i2c_write,					// Employ CustomI2cWrite() as basic I2C writing function.
+			custom_wait_ms,					// Employ CustomWaitMs() as basic waiting function.
+
+			RTL2832_DEMOD_ADDR,							// The RTL2832 I2C device address is 0x20 in 8-bit format.
+			CRYSTAL_FREQ_28800000HZ,		// The RTL2832 crystal frequency is 28.8 MHz.
+			TS_INTERFACE_PARALLEL,			// The RTL2832 TS interface mode is serial.
+			RTL2832_APPLICATION_DONGLE,		// The RTL2832 application mode is STB mode.
+			200,							// The RTL2832 update function reference period is 200 millisecond
+			OFF,							// The RTL2832 Function 1 enabling status is YES.
+
+			R820T_BASE_ADDRESS							// The R820T I2C device address is 0xc6 in 8-bit format.
+			);
+
+		deb_info(" %s BuildRtl2832R820tModule\n", __FUNCTION__);	
+
+	}	
 	else
 	{
 		deb_info(" -%s : RTL 2832 Unknown tuner on board...\n", __FUNCTION__);		

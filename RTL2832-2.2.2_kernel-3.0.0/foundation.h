@@ -143,6 +143,7 @@ enum MODULE_TYPE
 	TUNER_TYPE_GTLP10,						///<   GTLP10 tuner (DTMB)
 	TUNER_TYPE_JSS66T,						///<   JSS66T tuner (DTMB)
 	TUNER_TYPE_NONE,						///<   NONE tuner (DTMB)
+	TUNER_TYPE_R820T,						///<   R820T tuner (DVB-T)
 
 	// DVB-T NIM
 	DVBT_NIM_USER_DEFINITION,				///<   DVB-T NIM:   User definition
@@ -161,6 +162,7 @@ enum MODULE_TYPE
 	DVBT_NIM_RTL2832_TDA18272,				///<   DVB-T NIM:   RTL2832 + TDA18272
 	DVBT_NIM_RTL2832_FC0013,				///<   DVB-T NIM:   RTL2832 + FC0013
 	DVBT_NIM_RTL2832_RT910,					///<   DVB-T NIM:   RTL2832 + RT910
+	DVBT_NIM_RTL2832_R820T,					///<   DVB-T NIM:   RTL2832 + R820T
 
 	// QAM NIM
 	QAM_NIM_USER_DEFINITION,				///<   QAM NIM:   User definition
@@ -280,6 +282,8 @@ enum CRYSTAL_FREQ_HZ
 enum IF_FREQ_HZ
 {
 	IF_FREQ_0HZ        =        0,			///<   IF frequency =      0 MHz
+	IF_FREQ_3250000HZ  =  3250000,			///<   IF frequency =   3.25 MHz
+	IF_FREQ_3570000HZ  =  3570000,			///<   IF frequency =   3.57 MHz
 	IF_FREQ_4000000HZ  =  4000000,			///<   IF frequency =    4.0 MHz
 	IF_FREQ_4570000HZ  =  4570000,			///<   IF frequency =   4.57 MHz
 	IF_FREQ_4571429HZ  =  4571429,			///<   IF frequency =  4.571 MHz
