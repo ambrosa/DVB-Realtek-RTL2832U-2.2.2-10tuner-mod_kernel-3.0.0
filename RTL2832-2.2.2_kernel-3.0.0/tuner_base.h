@@ -1635,6 +1635,56 @@ struct FC0013B_EXTRA_MODULE_TAG
 	FC0013B_FP_RC_CAL_ADD           RcCalAdd;
 };
 
+// R820T extra module
+typedef struct R820T_EXTRA_MODULE_TAG R820T_EXTRA_MODULE;
+
+
+// R820T standard mode setting function pointer
+typedef int
+(*R820T_FP_SET_STANDARD_MODE)(
+	TUNER_MODULE *pTuner,
+	int StandardMode
+	);
+
+// R820T standard mode getting function pointer
+typedef int
+(*R820T_FP_GET_STANDARD_MODE)(
+	TUNER_MODULE *pTuner,
+	int *pStandardMode
+	);
+
+// R820T standby setting function pointer
+typedef int
+(*R820T_FP_SET_STANDBY)(
+	TUNER_MODULE *pTuner,
+	int LoopThroughType
+	);
+
+
+
+
+struct R820T_EXTRA_MODULE_TAG
+{
+
+	unsigned char Rafael_Chip;
+
+	// R820T extra variables
+	unsigned long IfFreqHz;
+	int BandwidthMode;
+	int IsBandwidthModeSet;
+
+	int StandardMode;
+	int IsStandardModeSet;
+
+	unsigned long CrystalFreqkHz;	
+
+	// R820T extra function pointers
+	R820T_FP_SET_STANDARD_MODE   SetStandardMode;
+	R820T_FP_GET_STANDARD_MODE   GetStandardMode;
+	
+	R820T_FP_SET_STANDBY   SetStandby;
+	
+};
 
 
 
@@ -1688,6 +1738,7 @@ struct TUNER_MODULE_TAG
 		GTLP10_EXTRA_MODULE      Gtlp10;
 		JSS66T_EXTRA_MODULE      Jss66t;
 		FC0013B_EXTRA_MODULE     Fc0013b;
+		R820T_EXTRA_MODULE	 R820t;
 	}
 	Extra;
 

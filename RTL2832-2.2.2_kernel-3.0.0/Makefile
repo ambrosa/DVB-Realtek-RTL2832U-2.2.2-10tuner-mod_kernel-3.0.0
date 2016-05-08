@@ -24,7 +24,7 @@ dvb-usb-rtl2832u-objs := demod_rtl2832.o dvbt_demod_base.o dvbt_nim_base.o \
 	tuner_max3543.o nim_rtl2832_mt2063.o nim_rtl2832_max3543.o \
 	nim_rtl2840_mt2063.o nim_rtl2840_max3543.o qam_demod_base.o qam_nim_base.o \
 	tuner_tda18272.o nim_rtl2832_tda18272.o rtl2832u_ioctl.o nim_rtl2832_fc0013.o \
-	tuner_fc0013.o
+	tuner_fc0013.o tuner_r820t.o nim_rtl2832_r820t.o
 
 obj-m += dvb-usb-rtl2832u.o
 

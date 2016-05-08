@@ -12,6 +12,7 @@
 #include "nim_rtl2832_max3543.h"
 #include "nim_rtl2832_tda18272.h"
 #include "nim_rtl2832_fc0013.h"
+#include "nim_rtl2832_r820t.h"
 
 #include "nim_rtl2836_fc2580.h"
 #include "nim_rtl2836_mxl5007t.h"
@@ -40,7 +41,8 @@ typedef enum{
 	RTL2832_TUNER_TYPE_MAX3543,
 	RTL2832_TUNER_TYPE_TDA18272,	
 	RTL2832_TUNER_TYPE_FC0013,
-	RTL2832_TUNER_TYPE_UNKNOWN,	
+	RTL2832_TUNER_TYPE_UNKNOWN,
+	RTL2832_TUNER_TYPE_R820T,
 }RTL2832_TUNER_TYPE;
 
 
@@ -157,6 +159,9 @@ struct rtl2832_state {
 #define FC0013_STANDBY_ADDRESS	0x06
 
 
+#define R820T_BASE_ADDRESS		0x34
+#define R820T_CHECK_ADDRESS		0x00
+#define R820T_CHECK_VALUE			0x69
 
 
 struct rtl2832_reg_addr{
